@@ -151,7 +151,7 @@ under the License.
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.example.AdvancedWordCount</mainClass>
+                                    <mainClass>org.example.EventTimeWordCountDebug</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
