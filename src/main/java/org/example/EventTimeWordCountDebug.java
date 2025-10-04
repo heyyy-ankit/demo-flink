@@ -7,10 +7,12 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 import org.apache.flink.util.OutputTag;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class EventTimeWordCountDebug {
 
@@ -97,8 +99,8 @@ public class EventTimeWordCountDebug {
         // Tumbling 10s event-time windows
         SingleOutputStreamOperator<Tuple2<String, Integer>> counts = words
                 .keyBy(t -> t.f0)
-                .window(TumblingEventTimeWindows.of(Duration.ofSeconds(10)))
-                .allowedLateness(Duration.ofSeconds(5))
+                .window(TumblingEventTimeWindows.of(Time.of(10, TimeUnit.SECONDS)))
+                .allowedLateness(Time.of(5, TimeUnit.SECONDS))
                 .sideOutputLateData(lateOutput)
                 .sum(1);
         
